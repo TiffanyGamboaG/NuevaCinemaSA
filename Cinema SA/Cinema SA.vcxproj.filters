@@ -18,5 +18,13 @@
     <ClCompile Include="Cinema SA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CinemaSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CinemaSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
