@@ -1,96 +1,361 @@
 #include "CinemaSystem.h"
+Movie* movies;
+Room* rooms;
+Schedule* schedules;
+int movie;
 
-string CinemaSystem::showFile()
+void CinemaSystem::showFile()
 {
+	option = 0;
 	system("cls");
 
-	cout << WHITE << " .................." << endl;
-	cout << " 1. Acerca de " << endl;
-	cout <<" 2. "<<RED<< "Salir " << WHITE<<endl << endl;
-	cout << " ";
-	cin >> option;
-	cout << " .................." << endl;
-	cout << endl;
+	printf(WHITE " .................. \n");
+	printf(" 1. Acerca de \n");
+	printf(" 2. "  RED "Salir \n"  WHITE);
+	printf(" ");
+	scanf_s("%d", &option);
+	printf(" .................. \n");
 
 	if (option == 1) {
-		cout << CYAN << " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " << endl;
-		cout << ROSE << " Tiffany Gabriell Gamboa Gonzalez " << endl;
-		cout << CYAN << " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " << endl;
-		cout << WHITE << endl;
+		printf(CYAN " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n");
+		printf(ROSE  " Tiffany Gabriell Gamboa Gonzalez \n");
+		printf(CYAN " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n");
+		printf(WHITE);
+
 		system("PAUSE");
 		system("cls");
+		showMenu();
+	}
+	else if (option == 2) {
+		exit(0);
+	}
+
+	printf("Opcion invalida \n");
+	system("PAUSE");
+	showFile();
+}
+
+void CinemaSystem::showMaintenance()
+{
+	system("cls");
+	option = 0;
+
+	printf(WHITE  " .................. \n");
+	printf(" 1. Peliculas \n");
+	printf(" 2. Salas \n");
+	printf(" 3. Horarios \n");
+	printf(" 4. Volver al inicio \n");
+	printf(" ");
+	scanf_s("%d", &option);
+	printf(" .................. \n \n");
+
+	if (option == 1) {
+		addMovieInformation();
+		printf(" \n");
+		showMovies();
+		system("PAUSE");
+		showMaintenance();
+	}
+	else if (option == 2) {
+		addRoomInformation();
+		printf("\n");
+		showRooms();
+		system("PAUSE");
+		showMaintenance();
+	}
+	else if (option == 3) {
+		addScheduleInformacion();
+		printf("\n");
+		showSchedule();
+		system("PAUSE");
+		showMaintenance();
+	}
+	else if (option == 4) {
+		showMenu();
+	}
+	printf("Opcion invalida \n");
+	system("PAUSE");
+	showMaintenance();
+}
+
+void CinemaSystem::showReservation()
+{
+	option = 0;
+	system("cls");
+
+	printf(" 1. Reservar \n");
+	printf(" 2. Volver al inicio \n");
+	scanf_s("%d",&option);
+
+	if (option == 1) {
+		reservation();
+		system("PAUSE");
+		showReservation();
+	}
+	else if(option == 2) {
+		showMenu();
+	}
+	printf("Opcion invalida \n");
+	system("PAUSE");
+	showReservation();
+}
+
+void CinemaSystem::showTicketSales()
+{
+	option = 0;
+	system("cls");
+
+	printf(" 1. Venta \n");
+	printf(" 2. Volver al inicio \n");
+	scanf_s("%d",&option);
+
+	if (option == 1) {
+		printf("Venta \n");
+		system("PAUSE");
+		showTicketSales();
 	}
 	else if (option == 2) {
 		showMenu();
 	}
-
-	return "Opcion invalida";
-    
+	printf("Opcion invalida \n");
+	system("PAUSE");
+	showTicketSales();
 }
 
-string CinemaSystem::showMaintenance()
+void CinemaSystem::addMovieInformation()
 {
-	system("cls");
-	option = 0;
+	string name = " ", country = " ", review = " ";
+	int year = 0, duration = 0;
 
-	cout << WHITE << " .................." << endl;
-	cout << " 1. Peliculas " << endl;
-	cout << " 2. Salas " << endl;
-	cout << " 3. Horarios" << endl;
-	cout << " 4. " RED << "Salir " << WHITE << endl << endl;
-	cin >> option;
-	cout << " .................." << endl;
-	cout << endl;
+	cout << "Cuantas peliculas quiere llenar: ";
+	cin >> numberMovies;
+	cin.ignore();
 
-	if (option == 1) {
-		return "Peliculas";
-	}
-	else if (option == 2) {
-		return "Salas";
-	}
-	else if (option == 3) {
-		return "Horarios";
-	}
-	else if (option == 4) {
-		return "Salir";
+	movies = new Movie[numberMovies];
+
+	for (int i = 0; i < numberMovies; i++) {
+
+		cout << "Digite el nombre de la pelicula " << i+1 << " :" << endl;
+		getline(cin, name);
+		movies[i].setName(name);
+		
+
+		cout << "Digite el pais " << i+1 << " :" << endl;
+		getline(cin, country);
+		movies[i].setCountry(country);
+		
+
+		cout << "Diginte la resena " << i+1 << " :" << endl;
+		getline(cin, review);
+		movies[i].setReview(review);
+		
+		cout << "Digite anyo de la pelicula " << i+1 << " :" << endl;
+		cin >> year;
+		movies[i].setYear(year);
+		
+		cin.ignore();
+
+		cout << "Digite la duracion de la pelicula en minutos " << i+1 << " :" << endl;
+		cin >> duration;
+		movies[i].setDuration(duration);
+		cin.ignore();
+		
 	}
 
-	return "Opcion invalida";
 }
 
-string CinemaSystem::showMenu()
+void CinemaSystem::showMovies()
+{
+	for (int i = 0; i < numberMovies; i++) {
+		cout << "Pelicula " << i + 1 << endl;
+		cout << movies[i].toString() << endl;
+		
+	}
+}
+
+void CinemaSystem::addRoomInformation()
+{
+	int number = 0, numberSeats = 0, price = 0;
+
+	cout << "Cuantas salas tiene el cine: ";
+	cin >> numberRooms;
+	cin.ignore();
+
+	rooms = new Room[numberRooms];
+
+	for (int i = 0; i < numberRooms; i++) {
+		cout << "Digite el numero de la sala: ";
+		cin >> number;
+		rooms[i].setNumber(number);
+
+		cout << "Digite el numero de butacas: ";
+		cin >> numberSeats;
+		rooms[i].setNumberSeats(numberSeats);
+
+		cout << "Digite el precio: ";
+		cin >> price;
+		rooms[i].setPrice(price);
+	}
+}
+
+void CinemaSystem::showRooms()
+{
+	for (int i = 0; i < numberRooms; i++) {
+		cout << "Sala " << endl;
+		cout << rooms[i].toString() << endl;
+	}
+}
+
+void CinemaSystem::addScheduleInformacion()
+{
+	string date, startTime, endTime;
+	cout << "Cuantos horarios posee el cine: ";
+	cin >> numberSchedule;
+	cin.ignore();
+
+	schedules = new Schedule[numberSchedule];
+
+	for (int i = 0; i < numberSchedule; i++) {
+		cout << "Digite la fecha: "<< endl;
+		getline(cin, date);
+		schedules[i].setDate(date);
+
+
+		cout << "Digite la hora inicial: " << endl;
+		getline(cin, startTime);
+		schedules[i].setStartTime(startTime);
+
+
+		cout << "Digite la hora final:  " << endl;
+		getline(cin, endTime);
+		schedules[i].setEndTime(endTime);
+	}
+}
+
+void CinemaSystem::showSchedule()
+{
+	for (int i = 0; i < numberSchedule; i++) {
+		cout << "Horarios " << endl;
+		cout << schedules[i].toString() << endl;
+	}
+}
+
+void CinemaSystem::reservation()
+{
+	if (movies == NULL) {
+		system("cls");
+		addMovieInformation();
+	}
+	showMovies();
+	printf("Digite el numero de la pelicula que quiere reservar: \n");
+	scanf_s("%d",&movie);
+
+
+}
+
+void CinemaSystem::room()
+{
+	int rows = 0;
+	int columns = 0;
+
+
+}
+
+CinemaSystem::CinemaSystem()
+{
+	numberMovies = 0;
+	option = 0;
+	numberRooms = 0;
+	numberSchedule = 0;
+}
+
+CinemaSystem::CinemaSystem(int newNumberMovies, int newOption,int newNumberRooms,int newNumberSchedule)
+{
+	numberMovies = newNumberMovies;
+	option = newOption;
+	numberRooms = newNumberRooms;
+	numberSchedule = newNumberSchedule;
+}
+
+void CinemaSystem::setNumberMovies(int newNumberMovies)
+{
+	numberMovies = newNumberMovies;
+}
+
+void CinemaSystem::setOption(int newOption)
+{
+	option = newOption;
+}
+
+void CinemaSystem::setNumberRooms(int newNumberRooms)
+{
+	numberRooms = newNumberRooms;
+}
+
+void CinemaSystem::setSchedule(int newNumberSchedule)
+{
+	numberSchedule = newNumberSchedule;
+}
+
+int CinemaSystem::getNumberMovies()
+{
+	return numberMovies;
+}
+
+int CinemaSystem::getOption()
+{
+	return option;
+}
+
+int CinemaSystem::getNumberRooms()
+{
+	return numberRooms;
+}
+
+int CinemaSystem::getNumberSchedule()
+{
+	return numberSchedule;
+}
+
+void CinemaSystem::showMenu()
 {
 	option = 0;
 
 	system("cls");
 
-	cout << YELLOW << "................. " << endl;
-	cout << " Nueva Cinema SA " << endl;
-	cout << "................. " << endl;
+	printf(YELLOW " .................\n ");
+	printf(" Nueva Cinema SA \n");
+	printf(YELLOW " .................\n ");
+	printf("\n");
 
-	cout << endl;
-	cout << WHITE << " 1. Achivo" << endl;
-	cout << " 2. Mantenimiento" << endl;
-	cout << " 3. Reserva" << endl;
-	cout << " 4. Venta" << endl;
-	cout <<" 5. "<<RED << "Salir"<<WHITE << endl << endl;
-	cout << " ";
-	cin >> option;
+	printf(WHITE " 1. Achivo \n");
+	printf(" 2. Mantenimiento \n");
+	printf(" 3. Reserva \n");
+	printf(" 4. Venta \n");
+	printf(" ");
+	scanf_s("%d", &option);
 
 	if (option == 1) {
 		showFile();
 	}
 	else if (option == 2) {
-		showMaintenance();
+     showMaintenance();
 	}
 	else if (option == 3) {
-		return "Reserva";
+		showReservation();
 	}
 	else if (option == 4) {
-		return "venta";
+		showTicketSales();
 	}
-	else if (option == 5) {
-		return "salio";
-	}
-	return "opcion invalida";
+
+	printf("Opcion invalida: ");
+	system("PAUSE");
+	showMenu();
+}
+
+CinemaSystem::~CinemaSystem()
+{
+	delete[] movies;
+	delete[] rooms;
+	delete[] schedules;
 }

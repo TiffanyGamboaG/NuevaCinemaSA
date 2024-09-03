@@ -1,18 +1,44 @@
 #pragma once
 #include <iostream>
-#include <string.h>
+#include <string>
 #include "colors.h"
+#include "Movie.h"
+#include "Room.h"
+#include "Schedule.h"
 using namespace std;
 
 class CinemaSystem
 {
 private:
+	int numberMovies;
 	int option;
-	string showFile();
-	string showMaintenance();
-
-
+	int numberRooms;
+	int numberSchedule;
+	void showFile();
+	void showMaintenance();
+	void showReservation();
+	void showTicketSales();
+	void addMovieInformation(); 
+	void showMovies();
+	void addRoomInformation();
+	void showRooms();
+	void addScheduleInformacion();
+	void showSchedule();
+	void reservation();
+	void room();
+	
 public:
-	string showMenu();
+	CinemaSystem();
+	CinemaSystem(int newNumberMovies, int newOption,int newNumberRooms,int newNumberSchedule);
+	void setNumberMovies(int newNumberMovies);
+	void setOption(int newOption);
+	void setNumberRooms(int newNumberRooms);
+	void setSchedule(int newNumberSchedule);
+	int getNumberMovies();
+	int getOption();
+	int getNumberRooms();
+	int getNumberSchedule();
+	void showMenu();
+	~CinemaSystem();
 };
 
