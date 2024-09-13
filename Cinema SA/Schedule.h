@@ -18,7 +18,7 @@ public:
 	void setStartTime(string newStartTime);
 	void setEndTime(string newEndTime);
 	string getDate();
-	string getStardTime();
+	string getStartTime();
 	string getEndTime();
 	string toString();
 };

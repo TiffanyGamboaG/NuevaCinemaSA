@@ -34,7 +34,7 @@ string Schedule::getDate()
 	return string(date);
 }
 
-string Schedule::getStardTime()
+string Schedule::getStartTime()
 {
 	return string(startTime);
 }

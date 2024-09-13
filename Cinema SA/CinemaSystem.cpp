@@ -3,7 +3,7 @@ Movie* movies;
 Room* rooms;
 Schedule* schedules;
 int movie;
-
+char*** room;
 void CinemaSystem::showFile()
 {
 	option = 0;
@@ -59,12 +59,12 @@ void CinemaSystem::showMaintenance()
 	else if (option == 2) {
 		addRoomInformation();
 		printf("\n");
-		showRooms();
+		showRoomsInformation();
 		system("PAUSE");
 		showMaintenance();
 	}
 	else if (option == 3) {
-		addScheduleInformacion();
+		addScheduleInformation();
 		printf("\n");
 		showSchedule();
 		system("PAUSE");
@@ -85,14 +85,16 @@ void CinemaSystem::showReservation()
 
 	printf(" 1. Reservar \n");
 	printf(" 2. Volver al inicio \n");
-	scanf_s("%d",&option);
+	scanf_s("%d", &option);
 
 	if (option == 1) {
-		reservation();
+		/*reservation();
 		system("PAUSE");
-		showReservation();
+		showReservation();*/
+		createRoom();
+		showRoom();
 	}
-	else if(option == 2) {
+	else if (option == 2) {
 		showMenu();
 	}
 	printf("Opcion invalida \n");
@@ -107,7 +109,7 @@ void CinemaSystem::showTicketSales()
 
 	printf(" 1. Venta \n");
 	printf(" 2. Volver al inicio \n");
-	scanf_s("%d",&option);
+	scanf_s("%d", &option);
 
 	if (option == 1) {
 		printf("Venta \n");
@@ -124,7 +126,7 @@ void CinemaSystem::showTicketSales()
 
 void CinemaSystem::addMovieInformation()
 {
-	string name = " ", country = " ", review = " ";
+	string movieName = " ", country = " ", review = " ";
 	int year = 0, duration = 0;
 
 	cout << "Cuantas peliculas quiere llenar: ";
@@ -135,33 +137,32 @@ void CinemaSystem::addMovieInformation()
 
 	for (int i = 0; i < numberMovies; i++) {
 
-		cout << "Digite el nombre de la pelicula " << i+1 << " :" << endl;
-		getline(cin, name);
-		movies[i].setName(name);
-		
+		cout << "Digite el nombre de la pelicula " << i + 1 << " :" << endl;
+		getline(cin, movieName);
+		movies[i].setMovieName(movieName);
 
-		cout << "Digite el pais " << i+1 << " :" << endl;
+
+		cout << "Digite el pais " << i + 1 << " :" << endl;
 		getline(cin, country);
 		movies[i].setCountry(country);
-		
 
-		cout << "Diginte la resena " << i+1 << " :" << endl;
+
+		cout << "Diginte la resena " << i + 1 << " :" << endl;
 		getline(cin, review);
 		movies[i].setReview(review);
-		
-		cout << "Digite anyo de la pelicula " << i+1 << " :" << endl;
+
+		cout << "Digite anyo de la pelicula " << i + 1 << " :" << endl;
 		cin >> year;
 		movies[i].setYear(year);
-		
+
 		cin.ignore();
 
-		cout << "Digite la duracion de la pelicula en minutos " << i+1 << " :" << endl;
+		cout << "Digite la duracion de la pelicula en minutos " << i + 1 << " :" << endl;
 		cin >> duration;
 		movies[i].setDuration(duration);
 		cin.ignore();
-		
-	}
 
+	}
 }
 
 void CinemaSystem::showMovies()
@@ -169,13 +170,13 @@ void CinemaSystem::showMovies()
 	for (int i = 0; i < numberMovies; i++) {
 		cout << "Pelicula " << i + 1 << endl;
 		cout << movies[i].toString() << endl;
-		
+
 	}
 }
 
 void CinemaSystem::addRoomInformation()
 {
-	int number = 0, numberSeats = 0, price = 0;
+	int roomNumber = 0, numberSeats = 0, seatPrice = 0;
 
 	cout << "Cuantas salas tiene el cine: ";
 	cin >> numberRooms;
@@ -184,21 +185,21 @@ void CinemaSystem::addRoomInformation()
 	rooms = new Room[numberRooms];
 
 	for (int i = 0; i < numberRooms; i++) {
-		cout << "Digite el numero de la sala: ";
-		cin >> number;
-		rooms[i].setNumber(number);
+		cout << "Digite el numero de la sala "<<i+1<<":";
+		cin >> roomNumber;
+		rooms[i].setRoomNumber(roomNumber);
 
-		cout << "Digite el numero de butacas: ";
+		cout << "Digite el numero de butacas " << i + 1 << ":";
 		cin >> numberSeats;
 		rooms[i].setNumberSeats(numberSeats);
 
-		cout << "Digite el precio: ";
-		cin >> price;
-		rooms[i].setPrice(price);
+		cout << "Digite el precio " << i + 1 << ":";
+		cin >> seatPrice;
+		rooms[i].setSeatPrice(seatPrice);
 	}
 }
 
-void CinemaSystem::showRooms()
+void CinemaSystem::showRoomsInformation()
 {
 	for (int i = 0; i < numberRooms; i++) {
 		cout << "Sala " << endl;
@@ -206,7 +207,7 @@ void CinemaSystem::showRooms()
 	}
 }
 
-void CinemaSystem::addScheduleInformacion()
+void CinemaSystem::addScheduleInformation()
 {
 	string date, startTime, endTime;
 	cout << "Cuantos horarios posee el cine: ";
@@ -216,17 +217,17 @@ void CinemaSystem::addScheduleInformacion()
 	schedules = new Schedule[numberSchedule];
 
 	for (int i = 0; i < numberSchedule; i++) {
-		cout << "Digite la fecha: "<< endl;
+		cout << "Digite la fecha " << i + 1 << ":"<< endl;
 		getline(cin, date);
 		schedules[i].setDate(date);
 
 
-		cout << "Digite la hora inicial: " << endl;
+		cout << "Digite la hora inicial " << i + 1 << ":" << endl;
 		getline(cin, startTime);
 		schedules[i].setStartTime(startTime);
 
 
-		cout << "Digite la hora final:  " << endl;
+		cout << "Digite la hora final " << i + 1 << ":" << endl;
 		getline(cin, endTime);
 		schedules[i].setEndTime(endTime);
 	}
@@ -245,20 +246,76 @@ void CinemaSystem::reservation()
 	if (movies == NULL) {
 		system("cls");
 		addMovieInformation();
+
 	}
 	showMovies();
 	printf("Digite el numero de la pelicula que quiere reservar: \n");
-	scanf_s("%d",&movie);
-
-
+	scanf_s("%d", &movie);
+	
 }
 
-void CinemaSystem::room()
+char*** CinemaSystem::createRoom()
 {
-	int rows = 0;
-	int columns = 0;
+	room = new char** [numberRooms];
+
+	for (int i = 0; i < numberRooms; i++) {
+		int seats = rooms[i].getNumberSeats();
+		int rows = 0, columns = 0;  
+
+		
+		for (int j = 1; j * j <= seats; j++) {
+			if (seats % j == 0) {
+				rows = j;           
+				columns = seats / j;  
+			}
+		}
+
+		room[i] = new char* [rows];
+		for (int m = 0; m < rows; m++) {
+			room[i][m] = new char[columns];
+		}
+
+		
+		for (int g = 0; g < rows; g++) {
+			for (int s = 0; s < columns; s++) {
+				room[i][g][s] = 'D';
+			}
+		}
+	}
+
+	return room;
+	
+}
+
+void CinemaSystem::showRoom()
+{
+	for (int i = 0; i < numberRooms; i++) {
+		int seats = rooms[i].getNumberSeats();
+		int rows = 0, columns = 0;
 
 
+		for (int j = 1; j * j <= seats; j++) {
+			if (seats % j == 0) {
+				rows = j;
+				columns = seats / j;
+			}
+		}
+
+		if (rows > 0 && columns > 0) {
+			printf("Sala %d\n", i + 1);
+			for (int m = 0; m < rows; m++) {
+				for (int s = 0; s < columns; s++) {
+					printf("%c ", room[i][m][s]);
+				}
+				printf("\n");
+			}
+		}
+	}
+}
+
+void CinemaSystem::assignRoom()
+{
+	
 }
 
 CinemaSystem::CinemaSystem()
@@ -269,7 +326,7 @@ CinemaSystem::CinemaSystem()
 	numberSchedule = 0;
 }
 
-CinemaSystem::CinemaSystem(int newNumberMovies, int newOption,int newNumberRooms,int newNumberSchedule)
+CinemaSystem::CinemaSystem(int newNumberMovies, int newOption, int newNumberRooms, int newNumberSchedule)
 {
 	numberMovies = newNumberMovies;
 	option = newOption;
@@ -339,7 +396,7 @@ void CinemaSystem::showMenu()
 		showFile();
 	}
 	else if (option == 2) {
-     showMaintenance();
+		showMaintenance();
 	}
 	else if (option == 3) {
 		showReservation();

@@ -9,6 +9,7 @@ using namespace std;
 
 class CinemaSystem
 {
+
 private:
 	int numberMovies;
 	int option;
@@ -18,18 +19,19 @@ private:
 	void showMaintenance();
 	void showReservation();
 	void showTicketSales();
-	void addMovieInformation(); 
+	void addMovieInformation();
 	void showMovies();
 	void addRoomInformation();
-	void showRooms();
-	void addScheduleInformacion();
+	void showRoomsInformation();
+	void addScheduleInformation();
 	void showSchedule();
 	void reservation();
-	void room();
-	
+	char*** createRoom();
+	void showRoom();
+	void assignRoom();
 public:
 	CinemaSystem();
-	CinemaSystem(int newNumberMovies, int newOption,int newNumberRooms,int newNumberSchedule);
+	CinemaSystem(int newNumberMovies, int newOption, int newNumberRooms, int newNumberSchedule);
 	void setNumberMovies(int newNumberMovies);
 	void setOption(int newOption);
 	void setNumberRooms(int newNumberRooms);

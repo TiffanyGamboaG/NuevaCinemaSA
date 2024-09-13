@@ -1,22 +1,27 @@
 #include "Room.h"
 
+void Room::createRoom()
+{
+
+}
+
 Room::Room()
 {
-	number = 0;
+	roomNumber = 0;
 	numberSeats = 0;
-	price = 0;
+	seatPrice = 0;
 }
 
-Room::Room(int newNumber, int newNumberSeats, int newPrice)
+Room::Room(int newRoomNumber, int newNumberSeats, int newSeatPrice)
 {
-	number = newNumber;
+	roomNumber = newRoomNumber;
 	numberSeats = newNumberSeats;
-	price = newPrice;
+	seatPrice = newSeatPrice;
 }
 
-void Room::setNumber(int newNumber)
+void Room::setRoomNumber(int newRoomNumber)
 {
-	number = newNumber;
+	roomNumber = newRoomNumber;
 }
 
 void Room::setNumberSeats(int newNumberSeats)
@@ -24,14 +29,14 @@ void Room::setNumberSeats(int newNumberSeats)
 	numberSeats = newNumberSeats;
 }
 
-void Room::setPrice(int newPrice)
+void Room::setSeatPrice(int newSeatPrice)
 {
-	price = newPrice;
+	seatPrice = newSeatPrice;
 }
 
-int Room::getNumber()
+int Room::getRoomNumber()
 {
-	return number;
+	return roomNumber;
 }
 
 int Room::getNumberSeats()
@@ -39,17 +44,17 @@ int Room::getNumberSeats()
 	return numberSeats;
 }
 
-int Room::getPrice()
+int Room::getSeatPrice()
 {
-	return price;
+	return seatPrice;
 }
 
 string Room::toString()
 {
 	ostringstream text;
-	text << "Numero de sala: " << number << "\n"
+	text << "Numero de sala: " << roomNumber << "\n"
 		<< "Candidad de butacas: " << numberSeats << "\n"
-		<< "Precio: " << price << "\n";
+		<< "Precio: " << seatPrice << "\n";
 
 	return text.str();
 }

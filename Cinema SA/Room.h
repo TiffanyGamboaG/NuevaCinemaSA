@@ -3,23 +3,25 @@
 #include <string>
 #include <sstream>
 #include "colors.h"
+#include "CinemaSystem.h"
 using namespace std;
 
 class Room
 {
 private:
-	int number;
+	int roomNumber;
 	int numberSeats;
-	int price;
+	int seatPrice;
+	void createRoom();
 public:
 	Room();
-	Room(int newNumber, int newNumberSeats, int newPrice);
-	void setNumber(int newNumber);
+	Room(int newRoomNumber, int newNumberSeats, int newSeatPrice);
+	void setRoomNumber(int newRoomNumber);
 	void setNumberSeats(int newNumberSeats);
-	void setPrice(int newPrice);
-	int getNumber();
+	void setSeatPrice(int newSeatPrice);
+	int getRoomNumber();
 	int getNumberSeats();
-	int getPrice();
+	int getSeatPrice();
 	string toString();
 };
 

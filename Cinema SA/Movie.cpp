@@ -2,7 +2,7 @@
 
 Movie::Movie()
 {
-	name = "";
+	movieName = "";
 	year = 0;
 	duration = 0;
 	country = "";
@@ -10,18 +10,18 @@ Movie::Movie()
 	
 }
 
-Movie::Movie(string newName, int newYear, int newDuration, string newCountry, string newReview,int newNumberMovies)
+Movie::Movie(string newMovieName, int newYear, int newDuration, string newCountry, string newReview)
 {
-	name = newName;
+	movieName = newMovieName;
 	year = newYear;
 	duration = newDuration;
 	country = newCountry;
 	review = newReview;
 }
 
-void Movie::setName(string newName)
+void Movie::setMovieName(string newMovieName)
 {
-	name = newName;
+	movieName = newMovieName;
 }
 
 void Movie::setYear(int newYear)
@@ -44,9 +44,9 @@ void Movie::setReview(string newReview)
 	review = newReview;
 }
 
-string Movie::getName()
+string Movie::getMovieName()
 {
-	return string(name);
+	return string(movieName);
 }
 
 int Movie::getYear()
@@ -72,7 +72,7 @@ string Movie::getReview()
 string Movie::toString()
 {
 	ostringstream text;
-	text << "Pelicula: " << name << "\n"
+	text << "Pelicula: " << movieName << "\n"
 		<< "Anyo: " << year << "\n"
 		<< "Duracion: " << duration << "\n"
 		<< "Pais: " << country << "\n"

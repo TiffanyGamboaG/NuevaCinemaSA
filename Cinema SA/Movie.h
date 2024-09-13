@@ -8,20 +8,20 @@ using namespace std;
 class Movie
 {
 private:
-	string name;
+	string movieName;
 	int year;
 	int duration;
 	string country;
 	string review;
 public:
 	Movie();
-	Movie(string newName, int newYear, int newDuration, string newCountry, string newReview,int newNumberMovies);
-	void setName(string newName);
+	Movie(string newMovieName, int newYear, int newDuration, string newCountry, string newReview);
+	void setMovieName(string newMovieName);
 	void setYear(int newYear);
 	void setDuration(int newDuration);
 	void setCountry(string newCountry);
 	void setReview(string newReview);
-	string getName();
+	string getMovieName();
 	int getYear();
 	int getDuration();
 	string getCountry();
