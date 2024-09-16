@@ -3,7 +3,9 @@
 #include <string>
 #include <sstream>
 #include "colors.h"
-#include "CinemaSystem.h"
+#include "Movie.h"
+#include "Schedule.h"
+
 using namespace std;
 
 class Room
@@ -12,8 +14,9 @@ private:
 	int roomNumber;
 	int numberSeats;
 	int seatPrice;
-	void createRoom();
 public:
+	Movie* assignMovie;
+	Schedule* assignSchedule;
 	Room();
 	Room(int newRoomNumber, int newNumberSeats, int newSeatPrice);
 	void setRoomNumber(int newRoomNumber);
@@ -23,5 +26,6 @@ public:
 	int getNumberSeats();
 	int getSeatPrice();
 	string toString();
+	
 };
 

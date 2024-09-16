@@ -47,9 +47,9 @@ string Schedule::getEndTime()
 string Schedule::toString()
 {
 	ostringstream text;
-	text << "Fecha " << date << "\n"
-		<< "Hora inical" << startTime << "\n"
-		<< "Hora final" << endTime << "\n";
+	text << "Fecha: " << date << "\n"
+		<< "Hora inical: " << startTime << "\n"
+		<< "Hora final: " << endTime << "\n";
 
 	return text.str();
 }

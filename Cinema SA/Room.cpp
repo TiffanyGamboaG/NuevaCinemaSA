@@ -1,15 +1,12 @@
 #include "Room.h"
 
-void Room::createRoom()
-{
-
-}
-
 Room::Room()
 {
 	roomNumber = 0;
 	numberSeats = 0;
 	seatPrice = 0;
+	assignMovie = nullptr;
+	assignSchedule = nullptr;
 }
 
 Room::Room(int newRoomNumber, int newNumberSeats, int newSeatPrice)
@@ -17,6 +14,9 @@ Room::Room(int newRoomNumber, int newNumberSeats, int newSeatPrice)
 	roomNumber = newRoomNumber;
 	numberSeats = newNumberSeats;
 	seatPrice = newSeatPrice;
+	assignMovie = nullptr;
+	assignSchedule = nullptr;
+	
 }
 
 void Room::setRoomNumber(int newRoomNumber)
@@ -56,7 +56,5 @@ string Room::toString()
 		<< "Candidad de butacas: " << numberSeats << "\n"
 		<< "Precio: " << seatPrice << "\n";
 
-	return text.str();
+	    return text.str();
 }
-
-
