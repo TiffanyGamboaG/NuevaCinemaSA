@@ -419,23 +419,51 @@ int CinemaSystem::roomIndex(int code)
 void CinemaSystem::ticketSales()
 {
 	int code = 0, card = 0, ID = 0;
+	int hour = 0, minutes = 0;
+	char startTime[6];
+	int hourMovie = 0, minutesMovie = 0;
+
 	printf("Digite el codigo para la venta: ");
 	scanf_s("%d",&code);
-	printf("Digite su cedula: ");
-	scanf_s("%d", &ID);
-	printf("Digite su numero de tarjeta: ");
-	scanf_s("%d", &card);
+	printf("Digite la hora actual (HH MM): \n");
+	scanf_s("%d %d", &hour, &minutes);
+	
 
 	int index = roomIndex(code);
+	string time = rooms[index].assignSchedule->getStartTime();
+	strcpy_s(startTime, time.c_str());
+	sscanf_s(startTime, "%d:%d", &hourMovie, &minutesMovie);
 
-	for (int i = 0; i < roomRows[index]; i++) {
-		for (int j = 0; j < roomColumns[index]; j++) {
-			if (reservationCode[index][i][j] == code) {
-				room[index][i][j] = 'V';
+	int currentTimeInMinutes = hour * 60 + minutes;
+	int movieTimeInMinutes = hourMovie * 60 + minutesMovie;
+	int timeDifference = movieTimeInMinutes - currentTimeInMinutes;
+
+	
+	if (timeDifference < 0) {
+		timeDifference += 24 * 60;
+	}
+
+	if (timeDifference <= 30) { 
+		printf("Digite su cedula: ");
+		scanf_s("%d", &ID);
+		printf("Digite su numero de tarjeta: ");
+		scanf_s("%d", &card);
+
+		for (int i = 0; i < roomRows[index]; i++) {
+			for (int j = 0; j < roomColumns[index]; j++) {
+				if (reservationCode[index][i][j] == code) {
+					room[index][i][j] = 'V';
+				}
 			}
 		}
+		printf("Pago realizado exitosamente \n");
+		printf("El pago se realizo al ID: %d \n", ID);
+		printf("El pago se realizo al numero de tarjeta: %d \n", card);
+		
 	}
-	printf("Pago realizado exitosamente \n");
+	else {
+		printf("La venta solo se puede hacer hasta que falten menos de 30 minutos\n");
+	}
 }
 
 void CinemaSystem::reservation()
