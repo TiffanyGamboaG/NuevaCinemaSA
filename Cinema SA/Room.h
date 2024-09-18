@@ -19,6 +19,7 @@ public:
 	Schedule* assignSchedule;
 	Room();
 	Room(int newRoomNumber, int newNumberSeats, int newSeatPrice);
+	~Room();
 	void setRoomNumber(int newRoomNumber);
 	void setNumberSeats(int newNumberSeats);
 	void setSeatPrice(int newSeatPrice);

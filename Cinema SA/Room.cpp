@@ -19,6 +19,12 @@ Room::Room(int newRoomNumber, int newNumberSeats, int newSeatPrice)
 	
 }
 
+Room::~Room()
+{
+	delete[] assignMovie;
+	delete[] assignSchedule;
+}
+
 void Room::setRoomNumber(int newRoomNumber)
 {
 	roomNumber = newRoomNumber;

@@ -41,14 +41,6 @@ private:
 public:
 	CinemaSystem();
 	CinemaSystem(int newNumberMovies, int newOption, int newNumberRooms, int newNumberSchedule);
-	void setNumberMovies(int newNumberMovies);
-	void setOption(int newOption);
-	void setNumberRooms(int newNumberRooms);
-	void setSchedule(int newNumberSchedule);
-	int getNumberMovies();
-	int getOption();
-	int getNumberRooms();
-	int getNumberSchedule();
 	void showMenu();
 	~CinemaSystem();
 };
